@@ -1,0 +1,20 @@
+{
+  "name": "qa-framework-comparison",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The same UI scenarios implemented in Playwright, Cypress, and Selenium with C#.",
+  "scripts": {
+    "test:playwright": "playwright test",
+    "test:cypress": "cypress run --browser chrome",
+    "test:selenium": "dotnet test QaFrameworkComparison.sln --configuration Release",
+    "typecheck": "tsc --noEmit",
+    "benchmark": "node scripts/benchmark.mjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.4",
+    "cypress": "^16.1.1",
+    "typescript": "^7.0.2"
+  }
+}
