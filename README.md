@@ -1,8 +1,9 @@
 # UI Automation Framework Comparison
 
-The same five SauceDemo scenarios implemented independently in Playwright, Cypress, and Selenium WebDriver with C#/NUnit. This repository demonstrates practical familiarity with all three tools and explains when I would choose each one.
+[![Framework comparison](https://github.com/ashrafessa4/qa-framework-comparison/actions/workflows/comparison.yml/badge.svg)](https://github.com/ashrafessa4/qa-framework-comparison/actions/workflows/comparison.yml)
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4)](https://dotnet.microsoft.com/)
 
-> Status badge is added when this repository is connected to GitHub.
+The same five SauceDemo scenarios implemented independently in Playwright, Cypress, and Selenium WebDriver with C#/NUnit. This repository demonstrates practical familiarity with all three tools and explains when I would choose each one.
 
 ## Identical scenario set
 
