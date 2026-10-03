@@ -20,7 +20,7 @@ internal sealed class SauceDemoPage(IWebDriver driver, WebDriverWait wait, strin
     {
         Visible(By.CssSelector("[data-test='username']")).SendKeys(username);
         Visible(By.CssSelector("[data-test='password']")).SendKeys(password);
-        Visible(By.CssSelector("[data-test='login-button']")).Click();
+        Clickable(By.CssSelector("[data-test='login-button']")).Click();
     }
 
     internal void AddBackpack()
@@ -39,13 +39,14 @@ internal sealed class SauceDemoPage(IWebDriver driver, WebDriverWait wait, strin
     internal void CompleteCheckout()
     {
         AddBackpack();
-        Visible(By.CssSelector("[data-test='shopping-cart-link']")).Click();
-        Visible(By.CssSelector("[data-test='checkout']")).Click();
+        Clickable(By.CssSelector("[data-test='shopping-cart-link']")).Click();
+        Clickable(By.CssSelector("[data-test='checkout']")).Click();
         Visible(By.CssSelector("[data-test='firstName']")).SendKeys(TestData.FirstName);
         Visible(By.CssSelector("[data-test='lastName']")).SendKeys(TestData.LastName);
         Visible(By.CssSelector("[data-test='postalCode']")).SendKeys(TestData.PostalCode);
-        Visible(By.CssSelector("[data-test='continue']")).Click();
-        Visible(By.CssSelector("[data-test='finish']")).Click();
+        Clickable(By.CssSelector("[data-test='continue']")).Click();
+        _wait.Until(currentDriver => currentDriver.Url.EndsWith("checkout-step-two.html"));
+        Clickable(By.CssSelector("[data-test='finish']")).Click();
     }
 
     internal IWebElement Visible(By locator)
@@ -56,6 +57,26 @@ internal sealed class SauceDemoPage(IWebDriver driver, WebDriverWait wait, strin
             {
                 var element = currentDriver.FindElement(locator);
                 return element.Displayed ? element : null;
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
+            catch (StaleElementReferenceException)
+            {
+                return null;
+            }
+        })!;
+    }
+
+    internal IWebElement Clickable(By locator)
+    {
+        return _wait.Until(currentDriver =>
+        {
+            try
+            {
+                var element = currentDriver.FindElement(locator);
+                return element.Displayed && element.Enabled ? element : null;
             }
             catch (NoSuchElementException)
             {

@@ -23,7 +23,7 @@ public sealed class SauceDemoTests
             "--disable-dev-shm-usage");
         _driver = new ChromeDriver(options);
         _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
-        var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+        var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
         var baseUrl = Environment.GetEnvironmentVariable("BASE_URL")
             ?? "https://www.saucedemo.com";
         _app = new SauceDemoPage(_driver, wait, baseUrl);
