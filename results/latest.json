@@ -1,0 +1,24 @@
+{
+  "createdAt": "2026-10-03T14:13:55.764Z",
+  "platform": "win32-x64",
+  "node": "v24.11.1",
+  "scenarioCount": 5,
+  "methodology": "One cold sequential CLI run per framework against SauceDemo; startup included.",
+  "results": [
+    {
+      "framework": "Playwright",
+      "durationSeconds": 5.19,
+      "passed": true
+    },
+    {
+      "framework": "Cypress",
+      "durationSeconds": 12.21,
+      "passed": true
+    },
+    {
+      "framework": "Selenium + C#",
+      "durationSeconds": 10.44,
+      "passed": true
+    }
+  ]
+}
