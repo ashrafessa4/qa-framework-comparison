@@ -40,13 +40,16 @@ internal sealed class SauceDemoPage(IWebDriver driver, WebDriverWait wait, strin
     {
         AddBackpack();
         Clickable(By.CssSelector("[data-test='shopping-cart-link']")).Click();
+        WaitForPath("cart.html");
         Clickable(By.CssSelector("[data-test='checkout']")).Click();
+        WaitForPath("checkout-step-one.html");
         Visible(By.CssSelector("[data-test='firstName']")).SendKeys(TestData.FirstName);
         Visible(By.CssSelector("[data-test='lastName']")).SendKeys(TestData.LastName);
         Visible(By.CssSelector("[data-test='postalCode']")).SendKeys(TestData.PostalCode);
         Clickable(By.CssSelector("[data-test='continue']")).Click();
-        _wait.Until(currentDriver => currentDriver.Url.EndsWith("checkout-step-two.html"));
+        WaitForPath("checkout-step-two.html");
         Clickable(By.CssSelector("[data-test='finish']")).Click();
+        WaitForPath("checkout-complete.html");
     }
 
     internal IWebElement Visible(By locator)
@@ -94,5 +97,12 @@ internal sealed class SauceDemoPage(IWebDriver driver, WebDriverWait wait, strin
         _wait.Until(currentDriver =>
             currentDriver.FindElements(By.CssSelector("[data-test='inventory-item']")).Count > 0);
         return _driver.FindElements(By.CssSelector("[data-test='inventory-item']"));
+    }
+
+    private void WaitForPath(string expectedPath)
+    {
+        _wait.Until(currentDriver =>
+            Uri.TryCreate(currentDriver.Url, UriKind.Absolute, out var currentUri)
+            && currentUri.AbsolutePath.EndsWith(expectedPath, StringComparison.Ordinal));
     }
 }
